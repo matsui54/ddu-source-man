@@ -4,7 +4,7 @@ import {
   Actions,
   BaseSource,
   Item,
-} from "https://deno.land/x/ddu_vim@v1.2.0/types.ts";
+} from "https://deno.land/x/ddu_vim@v1.3.0/types.ts";
 
 type ActionData = {
   word: string;

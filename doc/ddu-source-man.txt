@@ -16,6 +16,7 @@ Actions			|ddu-kind-man-actions|
 INTRODUCTION					*ddu-source-man-introduction*
 
 This source collects man command candidates.
+This source supports preview. You can call "preview" ui action.
 
 ==============================================================================
 INSTALL						*ddu-source-man-install*

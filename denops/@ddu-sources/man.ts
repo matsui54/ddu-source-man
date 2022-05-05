@@ -5,10 +5,7 @@ import {
   BaseSource,
   Item,
 } from "https://deno.land/x/ddu_vim@v1.6.0/types.ts";
-
-type ActionData = {
-  word: string;
-};
+import { ActionData } from "../@ddu-kinds/man.ts";
 
 type Params = Record<never, never>;
 
@@ -70,7 +67,8 @@ export class Source extends BaseSource<Params> {
                 width: page.length,
               }],
               action: {
-                word: page + section,
+                page,
+                section,
               },
             });
           }
@@ -87,7 +85,7 @@ export class Source extends BaseSource<Params> {
     open: async ({ denops, items }: ActionArguments<Params>) => {
       const action = items[0]?.action as ActionData;
       try {
-        await denops.cmd(`Man ${action.word}`);
+        await denops.cmd(`Man ${action.page + action.section}`);
       } catch (e) {
         console.error(e);
       }

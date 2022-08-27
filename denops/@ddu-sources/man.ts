@@ -4,7 +4,7 @@ import {
   Actions,
   BaseSource,
   Item,
-} from "https://deno.land/x/ddu_vim@v1.7.0/types.ts";
+} from "https://deno.land/x/ddu_vim@v1.10.1/types.ts";
 import { ActionData } from "../@ddu-kinds/man.ts";
 
 type Params = Record<never, never>;

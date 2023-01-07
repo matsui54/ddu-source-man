@@ -2,7 +2,7 @@ import {
   BaseKind,
   DduItem,
   Previewer,
-} from "https://deno.land/x/ddu_vim@v2.0.0/types.ts";
+} from "https://deno.land/x/ddu_vim@v2.1.0/types.ts";
 
 export type ActionData = {
   page: string;

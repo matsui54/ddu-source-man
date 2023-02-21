@@ -1,10 +1,4 @@
-import {
-  ActionArguments,
-  ActionFlags,
-  Actions,
-  BaseSource,
-  Item,
-} from "https://deno.land/x/ddu_vim@v2.1.0/types.ts";
+import { BaseSource, Item } from "https://deno.land/x/ddu_vim@v2.3.0/types.ts";
 import { ActionData } from "../@ddu-kinds/man.ts";
 
 type Params = Record<never, never>;
@@ -80,18 +74,6 @@ export class Source extends BaseSource<Params> {
       },
     });
   }
-
-  actions: Actions<Params> = {
-    open: async ({ denops, items }: ActionArguments<Params>) => {
-      const action = items[0]?.action as ActionData;
-      try {
-        await denops.cmd(`Man ${action.page + action.section}`);
-      } catch (e) {
-        console.error(e);
-      }
-      return Promise.resolve(ActionFlags.None);
-    },
-  };
 
   params(): Params {
     return {};

@@ -1,4 +1,4 @@
-import { BaseSource, Item } from "https://deno.land/x/ddu_vim@v2.7.0/types.ts";
+import { BaseSource, Item } from "https://deno.land/x/ddu_vim@v2.8.3/types.ts";
 import { ActionData } from "../@ddu-kinds/man.ts";
 
 type Params = Record<never, never>;
@@ -46,11 +46,11 @@ export class Source extends BaseSource<Params> {
             if (!line.length) {
               continue;
             }
-            const m = line.match(/^\s*(\S+)\s(\(\d\))/);
+            const m = line.match(/^\s*(\S+)\s\((\d)\)/);
             if (!m) {
               continue;
             }
-            const [page, section] = m;
+            const [_, page, section] = m;
             items.push({
               word: `${page} ${section}`,
               display: line,

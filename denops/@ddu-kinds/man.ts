@@ -5,7 +5,7 @@ import {
   BaseKind,
   DduItem,
   Previewer,
-} from "https://deno.land/x/ddu_vim@v2.7.0/types.ts";
+} from "https://deno.land/x/ddu_vim@v2.8.3/types.ts";
 
 export type ActionData = {
   page: string;
@@ -40,7 +40,7 @@ export class Kind extends BaseKind<Params> {
 
       const action = items[0]?.action as ActionData;
       try {
-        await denops.cmd(`${openCommand} Man ${action.page + action.section}`);
+        await denops.cmd(`${openCommand} Man ${action.section} ${action.page}`);
       } catch (e) {
         console.error(e);
       }

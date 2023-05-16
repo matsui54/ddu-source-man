@@ -1,4 +1,4 @@
-import { BaseSource, Item } from "https://deno.land/x/ddu_vim@v2.8.3/types.ts";
+import { BaseSource, Item } from "https://deno.land/x/ddu_vim@v2.8.4/types.ts";
 import { ActionData } from "../@ddu-kinds/man.ts";
 
 type Params = Record<never, never>;

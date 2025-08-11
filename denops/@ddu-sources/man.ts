@@ -1,4 +1,5 @@
-import { BaseSource, Item } from "https://deno.land/x/ddu_vim@v2.8.4/types.ts";
+import { type Item } from "jsr:@shougo/ddu-vim@~10.4.0/types";
+import { BaseSource } from "jsr:@shougo/ddu-vim@~10.4.0/source";
 import { ActionData } from "../@ddu-kinds/man.ts";
 
 type Params = Record<never, never>;
@@ -8,20 +9,18 @@ async function getOutput(
   cwd?: string,
 ): Promise<string[]> {
   try {
-    const proc = Deno.run({
-      cmd: cmds,
-      stdout: "piped",
-      stderr: "piped",
-      cwd: cwd,
-    });
-    const [status, stdout, stderr] = await Promise.all([
-      proc.status(),
-      proc.output(),
-      proc.stderrOutput(),
-    ]);
-    proc.close();
+    const command = new Deno.Command(
+      cmds[0],
+      {
+        args: cmds.slice(1),
+        stdout: "piped",
+        stderr: "piped",
+        cwd: cwd,
+      },
+    );
+    const { code, stdout, stderr } = await command.output();
 
-    if (!status.success) {
+    if (code !== 0) {
       console.error(new TextDecoder().decode(stderr));
       return [];
     }
@@ -33,9 +32,9 @@ async function getOutput(
 }
 
 export class Source extends BaseSource<Params> {
-  kind = "man";
+  override kind = "man";
 
-  gather(): ReadableStream<Item<ActionData>[]> {
+  override gather(): ReadableStream<Item<ActionData>[]> {
     return new ReadableStream({
       async start(controller) {
         const items: Item<ActionData>[] = [];
@@ -75,7 +74,7 @@ export class Source extends BaseSource<Params> {
     });
   }
 
-  params(): Params {
+  override params(): Params {
     return {};
   }
 }

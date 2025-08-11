@@ -1,11 +1,10 @@
 import {
-  ActionArguments,
+  type ActionArguments,
   ActionFlags,
-  Actions,
-  BaseKind,
   DduItem,
   Previewer,
-} from "https://deno.land/x/ddu_vim@v2.8.4/types.ts";
+} from "jsr:@shougo/ddu-vim@~10.4.0/types";
+import { BaseKind } from "jsr:@shougo/ddu-vim@~10.4.0/kind";
 
 export type ActionData = {
   page: string;
@@ -19,7 +18,7 @@ type OpenParams = {
 type Params = Record<never, never>;
 
 export class Kind extends BaseKind<Params> {
-  actions: Actions<Params> = {
+  override actions = {
     open: async ({
       denops,
       actionParams,
@@ -48,7 +47,7 @@ export class Kind extends BaseKind<Params> {
     },
   };
 
-  getPreviewer(args: {
+  override getPreviewer(args: {
     item: DduItem;
   }): Promise<Previewer | undefined> {
     const action = args.item.action as ActionData;
